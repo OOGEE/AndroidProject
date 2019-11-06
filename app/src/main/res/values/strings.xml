@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">project</string>
+    <string name="title_activity_menu">menu</string>
+    <string name="tab_text_1">한식</string>
+    <string name="tab_text_2">분식</string>
+    <string name="tab_text_3">중식</string>
+    <string name="tab_text_4">치킨</string>
+    <string name="tab_text_5">양식</string>
+    <string name="tab_text_6">일식</string>
+
+</resources>
