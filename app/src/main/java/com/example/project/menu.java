@@ -26,14 +26,27 @@ public class menu extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
-        FloatingActionButton fab = findViewById(R.id.fab);
+        String foodKind = getIntent().getStringExtra("foodName");
+        switch(foodKind){
+            case "koreanFood":
+                viewPager.setCurrentItem(0);
+                break;
+            case "snackFood":
+                viewPager.setCurrentItem(1);
+                break;
+            case "chineseFood":
+                viewPager.setCurrentItem(2);
+                break;
+            case "chickenFood":
+                viewPager.setCurrentItem(3);
+                break;
+            case "westernFood":
+                viewPager.setCurrentItem(4);
+                break;
+            case "japaneseFood":
+                viewPager.setCurrentItem(5);
+                break;
+        }
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 }
