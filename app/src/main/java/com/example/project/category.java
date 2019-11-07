@@ -41,12 +41,11 @@ public class menu extends AppCompatActivity {
                 viewPager.setCurrentItem(3);
                 break;
             case "westernFood":
-                viewPager.setCurrentItem(4);
-                break;
+            viewPager.setCurrentItem(4);
+            break;
             case "japaneseFood":
                 viewPager.setCurrentItem(5);
                 break;
         }
-
     }
 }
