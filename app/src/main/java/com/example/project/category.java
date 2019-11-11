@@ -15,7 +15,7 @@ import android.view.View;
 
 import com.example.project.ui.main.SectionsPagerAdapter;
 
-public class menu extends AppCompatActivity {
+public class category extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
