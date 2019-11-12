@@ -37,83 +37,39 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickKorenFood(View v){
-        String url = "http://toojs.asuscomm.com:8643/data/storeKindData/0";
-        NetworkTask networkTask = new NetworkTask(url, null);
-        networkTask.execute();
         Intent KoreanFoodIntent = new Intent(getApplicationContext(), category.class);
         KoreanFoodIntent.putExtra("foodName","koreanFood");
-        KoreanFoodIntent.putExtra("json", result);
         startActivity(KoreanFoodIntent);
     }
 
     public void onClickSnackFood(View v){
-        String url = "http://toojs.asuscomm.com:8643/data/storeKindData/1";
-        NetworkTask networkTask = new NetworkTask(url, null);
-        networkTask.execute();
         Intent SnackFoodIntent = new Intent(getApplicationContext(), category.class);
         SnackFoodIntent.putExtra("foodName","snackFood");
-        SnackFoodIntent.putExtra("json", result);
         startActivity(SnackFoodIntent);
     }
 
     public void onClickChineseFood(View v){
-        String url = "http://toojs.asuscomm.com:8643/data/storeKindData/2";
-        NetworkTask networkTask = new NetworkTask(url, null);
-        networkTask.execute();
         Intent ChineseFoodIntent = new Intent(getApplicationContext(), category.class);
         ChineseFoodIntent.putExtra("foodName","chineseFood");
-        ChineseFoodIntent.putExtra("json", result);
         startActivity(ChineseFoodIntent);
     }
 
     public void onClickChickenFood(View v){
-        String url = "http://toojs.asuscomm.com:8643/data/storeKindData/3";
-        NetworkTask networkTask = new NetworkTask(url, null);
-        networkTask.execute();
         Intent ChickenIntent = new Intent(getApplicationContext(), category.class);
         ChickenIntent.putExtra("foodName","chickenFood");
-        ChickenIntent.putExtra("json", result);
         startActivity(ChickenIntent);
     }
 
     public void onClickWesternFood(View v){
-        String url = "http://toojs.asuscomm.com:8643/data/storeKindData/4";
-        NetworkTask networkTask = new NetworkTask(url, null);
-        networkTask.execute();
         Intent WesternFoodIntent = new Intent(getApplicationContext(), category.class);
         WesternFoodIntent.putExtra("foodName","westernFood");
-        WesternFoodIntent.putExtra("json", result);
         startActivity(WesternFoodIntent);
     }
 
     public void onClickJapaneseFood(View v){
-        String url = "http://toojs.asuscomm.com:8643/data/storeKindData/5";
-        NetworkTask networkTask = new NetworkTask(url, null);
-        networkTask.execute();
         Intent JapaneseFoodIntent = new Intent(getApplicationContext(), category.class);
         JapaneseFoodIntent.putExtra("foodName","japaneseFood");
-        JapaneseFoodIntent.putExtra("json", result);
         startActivity(JapaneseFoodIntent);
     }
 
-    public class NetworkTask extends AsyncTask<Void, Void, String> {
-
-        private String url;
-        private ContentValues values;
-
-        public NetworkTask(String url, ContentValues values) {
-
-            this.url = url;
-            this.values = values;
-        }
-
-        @Override
-        protected String doInBackground(Void... params) {
-
-            RequestHttpURLConnection requestHttpURLConnection = new RequestHttpURLConnection();
-            result = requestHttpURLConnection.request(url, values); // 해당 URL로 부터 결과물을 얻어온다.
-
-            return result;
-        }
-    }
 }
