@@ -2,6 +2,7 @@ package com.example.project.ui.main;
 
 import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import com.example.project.FoodStore;
 import com.example.project.MainActivity;
 import com.example.project.R;
 import com.example.project.RequestHttpURLConnection;
+import com.example.project.explain;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -80,7 +82,8 @@ public class PlaceholderFragment extends Fragment {
         private String url;
         private ContentValues values;
         private Integer foodKind;
-        private  View root;
+        private View root;
+
         ProgressDialog asyncDialog = new ProgressDialog(getActivity());
 
         public NetworkTask(String url, ContentValues values) {
@@ -130,13 +133,24 @@ public class PlaceholderFragment extends Fragment {
                 JSONArray jsonArray = new JSONArray(result[foodKind]);
                 LinearLayout scrollView = (LinearLayout) root.findViewById(R.id.attach_point);
                 for(int i=0;i<jsonArray.length();i++){
-                    JSONObject jsonObjects = jsonArray.getJSONObject(i);
-                    Button button = new Button(getActivity());
-                    ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    button.setLayoutParams(lp);
-                    button.setText(jsonObjects.getString("name"));
-                    //button.setId();
-                    scrollView.addView(button);
+                        final JSONObject jsonObjects = jsonArray.getJSONObject(i);
+                        Button button = new Button(getActivity());
+                        ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        button.setLayoutParams(lp);
+                        button.setText(jsonObjects.getString("name"));
+                        //button.setId();
+                        scrollView.addView(button);
+                        button.setOnClickListener(new View.OnClickListener() {
+                        public void onClick(View v){
+                            Intent intent = new Intent(getActivity().getApplicationContext(), explain.class);
+                            try {
+                                intent.putExtra("name", jsonObjects.getString("name"));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            startActivity(intent);
+                        }
+                    });
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
