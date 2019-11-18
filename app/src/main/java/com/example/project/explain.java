@@ -4,18 +4,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 public class explain extends AppCompatActivity {
     private String name;
     public String urlto;
     private ContentValues values;
+    public String call, location, text;
     public String result;
+    TextView StoreName, Explain, Phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +31,21 @@ public class explain extends AppCompatActivity {
         name = intent.getStringExtra("name");
         urlto = "http://toojs.asuscomm.com:8643/data/speciefStoreData/" + name;
 
+        StoreName = findViewById(R.id.StoreName);
+        Explain = findViewById(R.id.Explain);
+        Phone = findViewById(R.id.Phone);
+
+        StoreName.setText(name);
+
         NetworkTask1 networkTask = new NetworkTask1(urlto);
         networkTask.execute();
+    }
 
+    public void MapClick(View v){
+        String MapData = "geo:0,0?q=" + location + ", 17z(" + name + ")";
+        Uri uri = Uri.parse(MapData);
+        Intent it = new Intent(Intent.ACTION_VIEW,uri);
+        startActivity(it);
     }
 
     public class NetworkTask1 extends AsyncTask<Void, Void, String> {
@@ -50,7 +67,13 @@ public class explain extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s){
             try {
-                JSONArray jsonArray = new JSONArray(result);
+                final JSONObject jsonObjects = new JSONObject(result);
+                call = jsonObjects.getString("call");
+                location = jsonObjects.getString("location");
+                text = jsonObjects.getString("text");
+
+                Explain.setText(text);
+                Phone.setText("전화 : " + call);
 
             } catch (JSONException e) {
                 e.printStackTrace();
