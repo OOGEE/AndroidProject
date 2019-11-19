@@ -1,8 +1,10 @@
 package com.example.project;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -31,6 +33,7 @@ public class explain extends AppCompatActivity {
     private ContentValues values;
     public String call, location, text;
     public String result;
+    public ViewPager viewPager;
     TextView StoreName, Explain, Phone;
     ImageView mainImage;
     Handler handler = new Handler();
@@ -41,6 +44,7 @@ public class explain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explain);
 
+        viewPager = findViewById(R.id.explainView);
         Intent intent = getIntent();
         name = intent.getStringExtra("name");
         urlto = "http://toojs.asuscomm.com:8643/data/speciefStoreData/" ;
@@ -58,7 +62,7 @@ public class explain extends AppCompatActivity {
 
         StoreName.setText(name);
 
-        NetworkTask1 networkTask = new NetworkTask1(urlto);
+        NetworkTask1 networkTask = new NetworkTask1(urlto,this);
         networkTask.execute();
     }
 
@@ -72,9 +76,10 @@ public class explain extends AppCompatActivity {
     public class NetworkTask1 extends AsyncTask<Void, Void, String> {
 
         private String url;
+        private Context context;
 
-        public NetworkTask1(String url) {
-
+        public NetworkTask1(String url,Context context) {
+            this.context = context;
             this.url = url;
         }
 
@@ -98,6 +103,7 @@ public class explain extends AppCompatActivity {
                 Explain.setText(text);
                 Phone.setText("전화 : " + call);
                 getInternetImage(jsonObjects.getString("mainphotourl"));
+                viewPager.setAdapter(new explainViewPagerAdapter(context,jsonObjects.getString("subphotourl")));
 
             } catch (JSONException e) {
                 e.printStackTrace();

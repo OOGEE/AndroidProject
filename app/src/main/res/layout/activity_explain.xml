@@ -51,6 +51,11 @@
                 android:text="phone : "
                 android:textSize = "16dp"/>
 
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/explainView"
+                android:layout_width="match_parent"
+                android:layout_height="300dp" />
+
 
         </LinearLayout>
     </ScrollView>
