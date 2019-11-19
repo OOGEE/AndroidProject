@@ -7,12 +7,16 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 public class explain extends AppCompatActivity {
     private String name;
@@ -29,7 +33,13 @@ public class explain extends AppCompatActivity {
 
         Intent intent = getIntent();
         name = intent.getStringExtra("name");
-        urlto = "http://toojs.asuscomm.com:8643/data/speciefStoreData/" + name;
+        urlto = "http://toojs.asuscomm.com:8643/data/speciefStoreData/" ;
+        try {
+            urlto += URLEncoder.encode(name.toString(),"utf-8");
+            //Log.d("url parse",urlto);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
         StoreName = findViewById(R.id.StoreName);
         Explain = findViewById(R.id.Explain);
@@ -67,7 +77,9 @@ public class explain extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s){
             try {
-                final JSONObject jsonObjects = new JSONObject(result);
+                //JSONArray jsonArray = new JSONArray(result);
+                //Log.d("JSON log",result);
+                JSONObject jsonObjects = new JSONObject(result.substring(1,result.length()));
                 call = jsonObjects.getString("call");
                 location = jsonObjects.getString("location");
                 text = jsonObjects.getString("text");
