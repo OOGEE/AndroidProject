@@ -3,8 +3,14 @@ package com.example.project.ui.main;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +18,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -22,6 +29,9 @@ import com.example.project.explain;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.InputStream;
+import java.net.URL;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -73,6 +83,7 @@ public class PlaceholderFragment extends Fragment {
         private ContentValues values;
         private Integer foodKind;
         private View root;
+        Handler handler = new Handler();
 
         ProgressDialog asyncDialog = new ProgressDialog(getActivity());
 
@@ -128,8 +139,9 @@ public class PlaceholderFragment extends Fragment {
                         ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                         button.setLayoutParams(lp);
                         button.setText(jsonObjects.getString("name"));
-                        //button.setId();
+                        Log.d("image", "make point");
                         scrollView.addView(button);
+                        getInternetImage(jsonObjects.getString("mainphotourl"), button);
                         button.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v){
                             Intent intent = new Intent(getActivity().getApplicationContext(), explain.class);
@@ -146,6 +158,34 @@ public class PlaceholderFragment extends Fragment {
                 e.printStackTrace();
             }
             super.onPostExecute(s);
+        }
+
+        public void getInternetImage(final String urlSource, final Button button){
+            Thread t = new Thread(new Runnable() {
+                @Override
+                public void run() {    // 오래 거릴 작업을 구현한다
+                    // TODO Auto-generated method stub
+                    try{
+                        // 걍 외우는게 좋다 -_-;
+                        Log.d("image","image get succes : " + urlSource);
+                        URL url = new URL(urlSource);
+
+                        InputStream is = url.openStream();
+
+                        final Bitmap bm = BitmapFactory.decodeStream(is);
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {  // 화면에 그려줄 작업
+                                Drawable buttonImage = new BitmapDrawable(getResources(), bm);
+                                buttonImage.setBounds(0, 0, 120, 120);
+                                button.setCompoundDrawables(buttonImage, null, null, null);
+                            }
+                        });
+                    } catch(Exception e){
+                    }
+                }
+            });
+            t.start();
         }
 
     }
