@@ -14,8 +14,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import net.daum.mf.map.api.MapPOIItem;
+import net.daum.mf.map.api.MapPoint;
+import net.daum.mf.map.api.MapView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,6 +39,7 @@ public class explain extends AppCompatActivity {
     public String call, location, text;
     public String result;
     public ViewPager viewPager;
+    public MapView mapView;
     TextView StoreName, Explain, Phone;
     ImageView mainImage;
     Handler handler = new Handler();
@@ -59,6 +65,13 @@ public class explain extends AppCompatActivity {
         Explain = findViewById(R.id.Explain);
         Phone = findViewById(R.id.Phone);
         mainImage = findViewById(R.id.foodMain);
+        //MapView mMapView = (MapView) findViewById(R.id.map_view);
+        //mMapView.setDaumMapApiKey(MapApiConst.DAUM_MAPS_ANDROID_APP_API_KEY);
+        //mMapView.setCurrentLocationEventListener(this);
+        mapView = new MapView(this);
+
+        ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
+        mapViewContainer.addView(mapView);
 
         StoreName.setText(name);
 
@@ -95,15 +108,26 @@ public class explain extends AppCompatActivity {
             try {
                 //JSONArray jsonArray = new JSONArray(result);
                 //Log.d("JSON log",result);
+
                 JSONObject jsonObjects = new JSONObject(result.substring(1,result.length()));
                 call = jsonObjects.getString("call");
-                location = jsonObjects.getString("location");
+                //location = jsonObjects.getString("location");
                 text = jsonObjects.getString("text");
-
+                String gpsArray[] =jsonObjects.getString("location").split(",");
+                MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(Double.parseDouble(gpsArray[0]),Double.parseDouble(gpsArray[1]));
                 Explain.setText(text);
                 Phone.setText("전화 : " + call);
                 getInternetImage(jsonObjects.getString("mainphotourl"));
                 viewPager.setAdapter(new explainViewPagerAdapter(context,jsonObjects.getString("subphotourl")));
+                mapView.setMapCenterPointAndZoomLevel(mapPoint, 2, true);
+                MapPOIItem marker = new MapPOIItem();
+                marker.setItemName(jsonObjects.getString("name"));
+                marker.setTag(0);
+                marker.setMapPoint(mapPoint);
+                marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
+                marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+
+                mapView.addPOIItem(marker);
 
             } catch (JSONException e) {
                 e.printStackTrace();

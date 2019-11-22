@@ -39,9 +39,14 @@
             <ImageButton
                 android:id="@+id/MapButton"
                 android:layout_width="match_parent"
-                android:layout_height="263dp"
+                android:layout_height="0dp"
                 android:onClick="MapClick"
                 app:srcCompat="@drawable/common_google_signin_btn_text_light" />
+
+            <RelativeLayout
+                android:id="@+id/map_view"
+                android:layout_width="match_parent"
+                android:layout_height="300dp" />
 
             <TextView
                 android:id="@+id/Phone"
