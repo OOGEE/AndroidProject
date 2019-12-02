@@ -20,46 +20,32 @@
                 android:id="@+id/StoreName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="식당이름"
-                android:textSize="40dp"
-                android:gravity="center"/>
+                android:textSize="40dp" />
 
-            <ImageView
-                android:id="@+id/foodMain"
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/explainView"
                 android:layout_width="match_parent"
-                android:layout_height="296dp" />
+                android:layout_height="300dp">
 
-            <TextView
-                android:id="@+id/Explain"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="내용"
-                android:textSize="16dp"/>
-
-            <ImageButton
-                android:id="@+id/MapButton"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:onClick="MapClick"
-                app:srcCompat="@drawable/common_google_signin_btn_text_light" />
-
-            <RelativeLayout
-                android:id="@+id/map_view"
-                android:layout_width="match_parent"
-                android:layout_height="300dp" />
+            </androidx.viewpager.widget.ViewPager>
 
             <TextView
                 android:id="@+id/Phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autoLink="all"
+                android:gravity="center"
                 android:text="phone : "
-                android:textSize = "16dp"/>
+                android:textSize="20dp" />
 
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/explainView"
+            <TextView
+                android:id="@+id/Explain"
                 android:layout_width="match_parent"
-                android:layout_height="300dp" />
+                android:layout_height="wrap_content"
+                android:text="내용"
+                android:textSize="16dp" />
 
 
         </LinearLayout>
