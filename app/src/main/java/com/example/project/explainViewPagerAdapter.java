@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.viewpager.widget.PagerAdapter;
 
@@ -20,10 +21,19 @@ public class explainViewPagerAdapter extends PagerAdapter {
     Handler handler = new Handler();
     private Context mContext;
     private ArrayList<Bitmap> imageCache;
-    public explainViewPagerAdapter(Context context, ArrayList<Bitmap> imageCache)
+    private String call;
+    private String explain;
+    private TextView Call,Explain;
+    public explainViewPagerAdapter(Context context, ArrayList<Bitmap> imageCache,String call,String explain,TextView Call,TextView Explain)
     {
         this.mContext = context;
         this.imageCache = imageCache;
+        this.call = call;
+        this.explain = explain;
+        this.Call = Call;
+        this.Explain = Explain;
+        Call.setText(call);
+        Explain.setText(explain);
     }
 
     @Override

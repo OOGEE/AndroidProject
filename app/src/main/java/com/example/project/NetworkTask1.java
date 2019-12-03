@@ -5,6 +5,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -25,6 +27,7 @@ public class NetworkTask1 extends AsyncTask<Void, Void, String> {
     public TextView Phone,Explain;
     public ArrayList<Bitmap> imageCache = new ArrayList<Bitmap>();
     public Context ctx;
+    public String call,explain;
 
     ProgressDialog asyncDialog;
 
@@ -53,8 +56,12 @@ public class NetworkTask1 extends AsyncTask<Void, Void, String> {
         String result = requestHttpURLConnection.request(url, null); // 해당 URL로 부터 결과물을 얻어온다.
         try {
             JSONObject jsonObjects = new JSONObject(result.substring(1, result.length()));
-            Phone.setText("전화 : " + jsonObjects.getString("call"));
-            Explain.setText(jsonObjects.getString("text"));
+
+            call = "전화 : " + jsonObjects.getString("call");
+            explain = jsonObjects.getString("text");
+
+            //Phone.setText("전화 : " + jsonObjects.getString("call"));
+            //Explain.setText(jsonObjects.getString("text"));
             String [] urlStringArray = (jsonObjects.getString("mainphotourl")+","+jsonObjects.getString("subphotourl")).split(",");
             for(int i = 0;i<urlStringArray.length;i++){
                 URL url = new URL(urlStringArray[i]);
@@ -70,7 +77,7 @@ public class NetworkTask1 extends AsyncTask<Void, Void, String> {
 
     @Override
     protected void onPostExecute(String s){
-        viewPager.setAdapter(new explainViewPagerAdapter(context,imageCache));
+        viewPager.setAdapter(new explainViewPagerAdapter(ctx,imageCache,call,explain,Phone,Explain));
         asyncDialog.dismiss();
     }
 }
