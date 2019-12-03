@@ -48,7 +48,7 @@ public class explainViewPagerAdapter extends PagerAdapter {
 
         ImageView imageView = view.findViewById(R.id.explainImageView);
         imageView.setImageBitmap(imageCache.get(position));
-        imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
         container.addView(view);
 
