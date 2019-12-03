@@ -4,4 +4,14 @@
         android:fontStyle="normal"
         android:fontWeight="400"
         android:font = "@font/bmyeonsung" />
+
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/fingetfood"/>
+
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/bmeuljiro"/>
 </font-family>

@@ -5,15 +5,20 @@
 
     <ImageView
         android:id="@+id/foodStoreImage"
-        android:layout_width="64dp"
-        android:layout_height="64dp"/>
+        android:layout_marginLeft="23sp"
+        android:layout_marginTop="2sp"
+        android:scaleType="fitCenter"
+        android:layout_width="96sp"
+        android:layout_height="96dp"/>
 
     <TextView
         android:id="@+id/foodStoreText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:paddingLeft="50dp"
-        android:textSize="35dp"/>
+        android:layout_marginLeft="30sp"
+        android:layout_marginRight="20sp"
+        android:fontFamily="@font/bmeuljiro"
+        android:textSize="27sp" />
 
 </LinearLayout>
