@@ -8,9 +8,12 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.viewpager.widget.ViewPager;
+
+import net.daum.mf.map.api.MapView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,16 +32,22 @@ public class NetworkTask1 extends AsyncTask<Void, Void, String> {
     public Context ctx;
     public String call,explain;
     public String[] location;
+    public String name;
+    public MapView mapView;
+    public ViewGroup mapViewContainer;
 
     ProgressDialog asyncDialog;
 
-    public NetworkTask1(String url, Context context, TextView Phone,TextView Explain,ViewPager viewPager,Context ctx) {
+    public NetworkTask1(String url, Context context, TextView Phone,TextView Explain,ViewPager viewPager,Context ctx,MapView mapView,ViewGroup mapViewContainer,String name) {
         this.context = context;
         this.url = url;
         this.Phone = Phone;
         this.Explain = Explain;
         this.ctx = ctx;
         this.viewPager = viewPager;
+        this.mapView = mapView;
+        this.mapViewContainer = mapViewContainer;
+        this.name = name;
         asyncDialog  = new ProgressDialog(ctx);
     }
 
@@ -79,7 +88,7 @@ public class NetworkTask1 extends AsyncTask<Void, Void, String> {
 
     @Override
     protected void onPostExecute(String s){
-        viewPager.setAdapter(new explainViewPagerAdapter(ctx,imageCache,call,explain,Phone,Explain,location));
+        viewPager.setAdapter(new explainViewPagerAdapter(ctx,imageCache,call,explain,Phone,Explain,location,mapView,mapViewContainer,name));
         asyncDialog.dismiss();
     }
 }

@@ -4,21 +4,25 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:hardwareAccelerated="false"
-        android:largeHeap="true"
         android:usesCleartextTraffic="true">
+        <activity android:name=".mapActivity"></activity>
 
-        <meta-data android:name="com.kakao.sdk.AppKey" android:value="a022df5a67b0ad9f96d7e5d00a474b4f"/>
-        <activity android:name=".explain"></activity>
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="a022df5a67b0ad9f96d7e5d00a474b4f" />
+
+        <activity android:name=".explain" />
         <activity
             android:name=".category"
             android:label="@string/title_activity_menu"
