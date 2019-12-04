@@ -28,6 +28,7 @@ public class NetworkTask1 extends AsyncTask<Void, Void, String> {
     public ArrayList<Bitmap> imageCache = new ArrayList<Bitmap>();
     public Context ctx;
     public String call,explain;
+    public String[] location;
 
     ProgressDialog asyncDialog;
 
@@ -59,6 +60,7 @@ public class NetworkTask1 extends AsyncTask<Void, Void, String> {
 
             call = "전화 : " + jsonObjects.getString("call");
             explain = jsonObjects.getString("text");
+            location = jsonObjects.getString("location").split(",");
 
             //Phone.setText("전화 : " + jsonObjects.getString("call"));
             //Explain.setText(jsonObjects.getString("text"));
@@ -77,7 +79,7 @@ public class NetworkTask1 extends AsyncTask<Void, Void, String> {
 
     @Override
     protected void onPostExecute(String s){
-        viewPager.setAdapter(new explainViewPagerAdapter(ctx,imageCache,call,explain,Phone,Explain));
+        viewPager.setAdapter(new explainViewPagerAdapter(ctx,imageCache,call,explain,Phone,Explain,location));
         asyncDialog.dismiss();
     }
 }

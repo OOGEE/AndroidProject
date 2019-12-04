@@ -13,6 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:hardwareAccelerated="false"
+        android:largeHeap="true"
         android:usesCleartextTraffic="true">
 
         <meta-data android:name="com.kakao.sdk.AppKey" android:value="a022df5a67b0ad9f96d7e5d00a474b4f"/>

@@ -170,4 +170,11 @@
             android:text="일식" />
     </TableRow>
 
+    <ImageView
+        android:layout_marginLeft="30sp"
+        android:layout_marginRight="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srcCompat="@drawable/yogiyominjok" />
+
 </TableLayout>
