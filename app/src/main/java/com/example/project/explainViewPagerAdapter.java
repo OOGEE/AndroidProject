@@ -3,23 +3,15 @@ package com.example.project;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.viewpager.widget.PagerAdapter;
-
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
-
-import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class explainViewPagerAdapter extends PagerAdapter implements MapView.MapViewEventListener{
@@ -72,8 +64,6 @@ public class explainViewPagerAdapter extends PagerAdapter implements MapView.Map
         marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
         mapView.setMapViewEventListener(this);
         mapView.addPOIItem(marker);
-        // 줌 레벨 변경
-
 
         container.addView(view);
 

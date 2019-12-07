@@ -1,23 +1,25 @@
 package com.example.project;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ViewGroup;
-
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
+import java.util.ArrayList;
 
 public class mapActivity extends AppCompatActivity {
 
-    MapPoint mapPoint;
     ViewGroup mapViewContainer;
     String name;
     String cordinateX;
     String cordinateY;
+    String call;
+    String explain;
+    ArrayList<Bitmap> imageCache;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,9 @@ public class mapActivity extends AppCompatActivity {
         name = getIntent().getStringExtra("name");
         cordinateX = getIntent().getStringExtra("cordinateX");
         cordinateY = getIntent().getStringExtra("cordinateY");
+        imageCache = (ArrayList<Bitmap>)getIntent().getSerializableExtra("images");
+        call = getIntent().getStringExtra("call");
+        explain = getIntent().getStringExtra("expalin");
 
         mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(Double.parseDouble(cordinateX), Double.parseDouble(cordinateY)), 1,true);
         MapPOIItem marker = new MapPOIItem();

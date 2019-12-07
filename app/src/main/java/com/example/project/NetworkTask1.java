@@ -5,19 +5,11 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.viewpager.widget.ViewPager;
-
 import net.daum.mf.map.api.MapView;
-
-import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
@@ -71,8 +63,6 @@ public class NetworkTask1 extends AsyncTask<Void, Void, String> {
             explain = jsonObjects.getString("text");
             location = jsonObjects.getString("location").split(",");
 
-            //Phone.setText("전화 : " + jsonObjects.getString("call"));
-            //Explain.setText(jsonObjects.getString("text"));
             String [] urlStringArray = (jsonObjects.getString("mainphotourl")+","+jsonObjects.getString("subphotourl")).split(",");
             for(int i = 0;i<urlStringArray.length;i++){
                 URL url = new URL(urlStringArray[i]);
